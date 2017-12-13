@@ -1,5 +1,5 @@
 package bgu.spl.a2;
-
+//test for git
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 
