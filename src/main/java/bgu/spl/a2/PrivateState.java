@@ -12,7 +12,7 @@ public abstract class PrivateState {
 	// holds the actions' name what were executed
 	private List<String> history;
 
-	public synchronized List<String> getLogger(){
+	public List<String> getLogger(){
 		return history;
 	}
 	
@@ -21,9 +21,11 @@ public abstract class PrivateState {
 	 *  
 	 * @param actionName
 	 */
-	public synchronized void addRecord(String actionName){
+	public void addRecord(String actionName){
 		history.add(actionName);
 	}
-	
-	
+
+	public void setHistory(List<String> history) {
+		this.history = history;
+	}
 }

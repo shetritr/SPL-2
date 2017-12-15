@@ -90,7 +90,7 @@ public abstract class Action<R> {
     protected synchronized final void complete(R result) {
         if(!promise.isResolved())
             promise.resolve(result);
-        //privateState.addRecord(getActionName());
+        privateState.addRecord(getActionName());
     }
 
     /**
