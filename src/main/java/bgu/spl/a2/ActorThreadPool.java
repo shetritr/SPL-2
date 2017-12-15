@@ -93,7 +93,8 @@ public class ActorThreadPool {
 					tempAction.addFirst(actorId);
 					tempAction.addFirst(actorState);
 					ConcurrentLinkedQueue <Action> actionQueue = new ConcurrentLinkedQueue<Action>();
-					actionQueue.add(action);
+					if(action != null)
+						actionQueue.add(action);
 					tempAction.addFirst(actionQueue);//made a list of the 1)action 2)PrivateState 3)actorId 4)boolean state
 					tempAction.add(true);
 					actors.put(actorId, tempAction);

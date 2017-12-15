@@ -26,6 +26,7 @@ public class CoursePrivateState extends PrivateState{
 		prequisites = new LinkedList<String>();
 		availableSpots = new Integer(0);
 		registered = new Integer(0);
+		this.setHistory(new LinkedList<String>());
 
 
 	}

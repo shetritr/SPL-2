@@ -1,5 +1,4 @@
 package bgu.spl.a2;
-import javax.xml.soap.SOAPPart;
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -16,12 +15,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public abstract class Action<R> {
     protected Promise <R>  promise;
-    private String name;
-    private PrivateState privateState;
-    private ActorThreadPool MyPool;
-    private boolean Continue = false;
-    private callback tocallback;
-    private String Actorname;
+    protected String name;
+    protected PrivateState privateState;
+    protected ActorThreadPool MyPool;
+    protected boolean Continue = false;
+    protected callback tocallback;
+    protected String Actorname;
 
 	/**
      * start handling the action - note that this method is protected, a thread
@@ -71,8 +70,6 @@ public abstract class Action<R> {
           for (Action tocheckaction:actions) {
               tocheckaction.getResult().subscribe(()-> {
                   ActionCounter.incrementAndGet();
-                  if(Actorname == null)
-                      System.out.println("dsdss");
                   if(ActionCounter.get() == actions.size())
                       sendMessage(this,Actorname,privateState);
                       }

@@ -22,13 +22,11 @@ public class DepartmentPrivateState extends PrivateState{
 		studentList = new LinkedList<String>();
 		setHistory(new LinkedList<String>());
 	}
-	public void setCourse(String course){
-		if(!courseList.contains(course))
-			courseList.add(course);
+	public boolean AddCourse(String course){
+			return courseList.add(course);//if this list changed as a result of the call
 	}
-	public void setStudent(String student){
-		if(!studentList.contains(student))
-			studentList.add(student);
+	public boolean AddStudent(String student){
+			return studentList.add(student);//if this list changed as a result of the call
 	}
 	public void removeCours(String course){
 		courseList.remove(course);
