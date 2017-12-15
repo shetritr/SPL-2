@@ -1,5 +1,4 @@
 package bgu.spl.a2;
-
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 
