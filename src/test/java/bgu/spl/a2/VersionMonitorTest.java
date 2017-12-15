@@ -8,12 +8,12 @@ import junit.framework.TestCase;
  * {@link #await(int)} with this version number in order to wait until this
  * version number changes. you can also increment the version number by one using the {@link #inc()}
  * method.
- * 
+ *
  * VersionMonitorTest class used for testing VersionMonitor class & function's.
  */
 
 public class VersionMonitorTest extends TestCase {
-	
+
 	/**
 	 * @Test 1 - Test VersionMonitor class - {@link #getVersion()} function
 	 */
@@ -92,7 +92,7 @@ public class VersionMonitorTest extends TestCase {
             fail("Test 3: VersionMonitor class - await() function - fail " + ex.getMessage());
         }
 	}
-	
+
 	/**
 	 * EOF
 	 */

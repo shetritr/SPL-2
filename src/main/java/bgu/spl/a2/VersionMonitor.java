@@ -31,9 +31,7 @@ public class VersionMonitor {
     }
 
     public synchronized void await(int version) throws InterruptedException {//wait for check if the version = getversion the synchronization to prevent inc
-        if(version<getVersion())
-            throw new IllegalStateException("The version is to low and never unlook");
-        while(version != getVersion())
+        while(version == getVersion())
             wait();
     }
 }

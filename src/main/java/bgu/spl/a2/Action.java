@@ -1,4 +1,5 @@
 package bgu.spl.a2;
+import javax.xml.soap.SOAPPart;
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -14,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @param <R> the action result type
  */
 public abstract class Action<R> {
-    private Promise <R>  promise;
+    protected Promise <R>  promise;
     private String name;
     private PrivateState privateState;
     private ActorThreadPool MyPool;
@@ -27,7 +28,7 @@ public abstract class Action<R> {
      * cannot call it directly.
      */
     protected abstract void start();
-    
+
 
     /**
     *
@@ -51,12 +52,12 @@ public abstract class Action<R> {
             start();
         }
    }
-    
-    
+
+
     /**
      * add a callback to be executed once *all* the given actions results are
      * resolved
-     * 
+     *
      * Implementors note: make sure that the callback is running only once when
      * all the given actions completed.
      *
@@ -70,8 +71,10 @@ public abstract class Action<R> {
           for (Action tocheckaction:actions) {
               tocheckaction.getResult().subscribe(()-> {
                   ActionCounter.incrementAndGet();
+                  if(Actorname == null)
+                      System.out.println("dsdss");
                   if(ActionCounter.get() == actions.size())
-                      sendMessage(this,name,privateState);
+                      sendMessage(this,Actorname,privateState);
                       }
               );
         }
@@ -85,34 +88,35 @@ public abstract class Action<R> {
      * @param result - the action calculated result
      */
     protected synchronized final void complete(R result) {
-        promise.resolve(result);
-        privateState.addRecord(getActionName());
+        if(!promise.isResolved())
+            promise.resolve(result);
+        //privateState.addRecord(getActionName());
     }
-    
+
     /**
      * @return action's promise (result)
      */
     public synchronized final Promise<R> getResult() {
     	return promise;
     }
-    
+
     /**
      * send an action to an other actor
-     * 
+     *
      * @param action
      * 				the action
      * @param actorId
      * 				actor's id
      * @param actorState
 	 * 				actor's private state (actor's information)
-	 *    
+	 *
      * @return promise that will hold the result of the sent action
      */
 	public Promise<?> sendMessage(Action<?> action, String actorId, PrivateState actorState){
 	    MyPool.submit(action,actorId,actorState);
 	    return action.getResult();
 	}
-	
+
 	/**
 	 * set action's name
 	 * @param actionName
@@ -122,7 +126,7 @@ public abstract class Action<R> {
             this.name = actionName;
         }
 	}
-	
+
 	/**
 	 * @return action's name
 	 */
