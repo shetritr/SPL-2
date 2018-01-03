@@ -3,6 +3,8 @@ package bgu.spl.a2;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * represents an actor thread pool - to understand what this class does please
@@ -16,7 +18,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class ActorThreadPool {
 	private HashMap<String,LinkedList> actors;
-	private int MonitorNumber;
+	private AtomicInteger MonitorNumber;
+	private VersionMonitor versionMonitor;
 	private List <Thread> threads;
 	boolean istopped;
 
@@ -34,11 +37,41 @@ public class ActorThreadPool {
 	 */
 	public ActorThreadPool(int nthreads) {
 		actors = new HashMap<String,LinkedList>();
-		MonitorNumber = -1;
-		for (int i = 0; i < nthreads; i++) {
-			threads.add(new Thread());
-		}
+		MonitorNumber = new AtomicInteger(0);
+		versionMonitor = new VersionMonitor();
+		threads = new LinkedList<Thread>();
 		istopped = false;
+		for (int i = 0; i < nthreads; i++) {
+			threads.add(new Thread(()->{
+				while(!istopped){
+					String ActorName = "";
+					AtomicBoolean foundActor = new AtomicBoolean(false);
+					LinkedList Actor = null;
+					synchronized (actors) {
+						Iterator<String> ActorsNames = actors.keySet().iterator();
+						while (ActorsNames.hasNext() && !foundActor.get()) {
+							ActorName = ActorsNames.next();
+							Actor = actors.get(ActorName);
+							if ((Boolean) Actor.get(3) && !((Queue)Actor.get(0)).isEmpty()) {
+								foundActor.set(true);
+								Actor.set(3, false);
+							}
+						}
+					}
+					if(foundActor.get()){
+						((Action<?>)((Queue)Actor.get(0)).poll()).handle(this,ActorName,(PrivateState) Actor.get(1));
+						Actor.set(3, true);
+						versionMonitor.inc();
+					}
+					try {
+						versionMonitor.await(versionMonitor.getVersion());
+					}catch (InterruptedException e){
+						break;
+					}
+				}
+
+			}));
+		}
 	}
 
 	/**
@@ -59,11 +92,16 @@ public class ActorThreadPool {
 					LinkedList tempAction = new LinkedList();
 					tempAction.addFirst(actorId);
 					tempAction.addFirst(actorState);
-					tempAction.addFirst(new ConcurrentLinkedQueue<Action>().add(action));//made a list of the 1)action 2)PrivateState 3)actorId
+					ConcurrentLinkedQueue <Action> actionQueue = new ConcurrentLinkedQueue<Action>();
+					if(action != null)
+						actionQueue.add(action);
+					tempAction.addFirst(actionQueue);//made a list of the 1)action 2)PrivateState 3)actorId 4)boolean state
+					tempAction.add(true);
 					actors.put(actorId, tempAction);
 				} else {
 					((ConcurrentLinkedQueue) actors.get(actorId).getFirst()).add(action);
 				}
+				//versionMonitor.inc();
 			}
 		}
 	}
@@ -92,8 +130,10 @@ public class ActorThreadPool {
 	/**
 	 * start the threads belongs to this thread pool
 	 */
-	public void start() {
-
+	public synchronized void start() {
+		for (Thread thisThread:threads) {
+			thisThread.start();
+		}
 	}
 
 }
