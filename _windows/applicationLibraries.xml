@@ -1,17 +1,8 @@
 <application>
   <component name="libraryTable">
-    <library name="commons-codec-1.10">
+    <library name="gson-2.2.2">
       <CLASSES>
-        <root url="jar://$USER_HOME$/a/httpcomponents-client-4.5.6-bin/httpcomponents-client-4.5.6/lib/commons-codec-1.10.jar!/" />
-        <root url="jar://$USER_HOME$/a/httpcomponents-client-4.5.6-bin/httpcomponents-client-4.5.6/lib/commons-logging-1.2.jar!/" />
-        <root url="jar://$USER_HOME$/a/httpcomponents-client-4.5.6-bin/httpcomponents-client-4.5.6/lib/fluent-hc-4.5.6.jar!/" />
-        <root url="jar://$USER_HOME$/a/httpcomponents-client-4.5.6-bin/httpcomponents-client-4.5.6/lib/httpclient-4.5.6.jar!/" />
-        <root url="jar://$USER_HOME$/a/httpcomponents-client-4.5.6-bin/httpcomponents-client-4.5.6/lib/httpclient-cache-4.5.6.jar!/" />
-        <root url="jar://$USER_HOME$/a/httpcomponents-client-4.5.6-bin/httpcomponents-client-4.5.6/lib/httpclient-win-4.5.6.jar!/" />
-        <root url="jar://$USER_HOME$/a/httpcomponents-client-4.5.6-bin/httpcomponents-client-4.5.6/lib/httpcore-4.4.10.jar!/" />
-        <root url="jar://$USER_HOME$/a/httpcomponents-client-4.5.6-bin/httpcomponents-client-4.5.6/lib/httpmime-4.5.6.jar!/" />
-        <root url="jar://$USER_HOME$/a/httpcomponents-client-4.5.6-bin/httpcomponents-client-4.5.6/lib/jna-4.4.0.jar!/" />
-        <root url="jar://$USER_HOME$/a/httpcomponents-client-4.5.6-bin/httpcomponents-client-4.5.6/lib/jna-platform-4.4.0.jar!/" />
+        <root url="jar://$USER_HOME$/Desktop/לימודים/gson-2.2.2.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
