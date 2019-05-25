@@ -143,6 +143,9 @@
         <root url="file://$USER_HOME$/Documents/aws-sdk-java-v2-master/aws-sdk-java-v2-master/utils/src/main/java" />
         <root url="file://$USER_HOME$/Documents/aws-sdk-java-v2-master/aws-sdk-java-v2-master/utils/src/test/java" />
       </SOURCES>
+      <excluded>
+        <root url="file://$USER_HOME$/Documents/aws-sdk-java-v2-master/aws-sdk-java-v2-master/build-tools/src/main/java" />
+      </excluded>
     </library>
   </component>
 </application>
