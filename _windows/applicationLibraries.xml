@@ -1,7 +1,9 @@
 <application>
   <component name="libraryTable">
     <library name="gson-2.2.2">
-      <CLASSES />
+      <CLASSES>
+        <root url="file://$USER_HOME$/Documents/aws-java-sample" />
+      </CLASSES>
       <JAVADOC />
       <SOURCES>
         <root url="file://$USER_HOME$/Documents/aws-sdk-java-v2-master/aws-sdk-java-v2-master/build-tools/src/main/java" />
@@ -142,6 +144,7 @@
         <root url="file://$USER_HOME$/Documents/aws-sdk-java-v2-master/aws-sdk-java-v2-master/test/test-utils/src/test/java" />
         <root url="file://$USER_HOME$/Documents/aws-sdk-java-v2-master/aws-sdk-java-v2-master/utils/src/main/java" />
         <root url="file://$USER_HOME$/Documents/aws-sdk-java-v2-master/aws-sdk-java-v2-master/utils/src/test/java" />
+        <root url="file://$USER_HOME$/Documents/aws-java-sample/src/main/java" />
       </SOURCES>
       <excluded>
         <root url="file://$USER_HOME$/Documents/aws-sdk-java-v2-master/aws-sdk-java-v2-master/build-tools/src/main/java" />
