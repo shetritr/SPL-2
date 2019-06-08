@@ -186,6 +186,8 @@
         <root url="jar://$USER_HOME$/Documents/pdf/jar_files/netty-handler-4.1.17.Final.jar!/" />
         <root url="jar://$USER_HOME$/Documents/pdf/jar_files/netty-resolver-4.1.17.Final.jar!/" />
         <root url="jar://$USER_HOME$/Documents/pdf/jar_files/netty-transport-4.1.17.Final.jar!/" />
+        <root url="jar://$USER_HOME$/Documents/hadoop-common-2.6.0.jar!/" />
+        <root url="jar://$USER_HOME$/Documents/hadoop-mapreduce-client-core-2.6.0.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
